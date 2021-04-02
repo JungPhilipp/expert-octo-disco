@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+
+  <!-- JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+          integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+          crossorigin=""></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Index</title>
+</head>
+
+<body>
+  <h1>Index</h1>
+  <p>PLZ zones for Heidelberg</p>
+  <div id="mapid"></div>
+
+  <!-- Set up OSM -->
+  <script>
+    let mapobj = L.map('mapid', {minZoom: 5, maxZoom: 13, doubleClickZoom: false}).setView([49.4079, 18.6877], 12);
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                'attribution': 'Kartendaten &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> Mitwirkende',
+                'useCache': true
+    }).addTo(mapobj);
+
+    // // Plot everything within the PLZ range of Heidelberg
+    // let plz;
+    // for (plz=69115; plz<69127; plz++) {
+    //   jQuery.get("/plz/" + plz, function (data) {
+    //     let polygon = L.geoJSON(data);
+    //     polygon.addTo(mapobj);
+    //     mapobj.setView(polygon.getBounds().getCenter());
+    //   });
+    // }
+
+    // Smarter plotting
+    jQuery.get("/city/Heidelberg", function (data) {
+      let polygon = L.geoJSON(data);
+      polygon.addTo(mapobj);
+      mapobj.setView(polygon.getBounds().getCenter());
+    });
+
+    let myStyle = {
+        weight: 1,
+        opacity: 1,
+        color: "#7f7f7f",
+        fillColor: "#a8a8a8",
+        fillOpacity: 1
+    };
+
+  </script>
+
+</body>
+
+</html>
