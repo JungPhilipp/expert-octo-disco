@@ -1,0 +1,3 @@
+[submodule "flathunter"]
+	path = flathunter
+	url = git@github.com:PhilipEHausner/flathunter.git
