@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 psycopg2-binary = "*"
+get-docker-secret = "*"
 
 [dev-packages]
 

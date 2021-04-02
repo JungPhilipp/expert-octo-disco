@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c15b3839ff4c6b1ddb18902dfecd3576eb36fd996ebbff14e07fe919dfff116c"
+            "sha256": "da088f980860e78687e79591c7cd2cf1da299241e3a1cfe2b02ff13b5c760fa8"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -14,6 +14,13 @@
         ]
     },
     "default": {
+        "get-docker-secret": {
+            "hashes": [
+                "sha256:684b35a792db56ceb5d52ee015670ad7710625ab20c9ff855ae88a23ceb5fe3a"
+            ],
+            "index": "pypi",
+            "version": "==1.0.1"
+        },
         "psycopg2-binary": {
             "hashes": [
                 "sha256:0deac2af1a587ae12836aa07970f5cb91964f05a7c6cdb69d8425ff4c15d4e2c",
