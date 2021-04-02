@@ -5,11 +5,31 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: example
-    ports:
-      - 5432:5432
+    - POSTGRES_USER_FILE=/run/secrets/postgres_user
+    - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_pw
     volumes:
       - db-data:/var/lib/postgresql/data
+    secrets:
+      - postgres_user
+      - postgres_pw
+
+  crawler:
+    build:
+      context: .
+      dockerfile: crawler.dockerfile
+    volumes:
+      - .:/src
+    secrets:
+      - postgres_user
+      - postgres_pw
+
+
 
 volumes:
   db-data:
+
+secrets:
+  postgres_user:
+    file: /var/docker/secrets/postgres_user
+  postgres_pw:
+    file: /var/docker/secrets/postgres_pw
